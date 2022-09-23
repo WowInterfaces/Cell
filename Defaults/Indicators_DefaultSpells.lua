@@ -40,6 +40,7 @@ local aoeHealings = {
     115098, -- 真气波
     123986, -- 真气爆裂
     115310, -- 还魂术
+    -- 191837, -- 精华之泉
     322118, -- 青龙下凡 (SUMMON)
 
     -- paladin
@@ -62,6 +63,10 @@ local aoeHealings = {
     114942, -- 治疗之潮
 }
 
+local aoeHealingIDs = {
+    [343819] = true, -- 朱鹤下凡，朱鹤产生的“迷雾之风”的施法者是玩家
+}
+
 do
     local temp = {}
     for _, id in pairs(aoeHealings) do
@@ -70,9 +75,9 @@ do
     aoeHealings = temp
 end
 
-function I:IsAoEHealing(name)
-    if not name then return false end
-    return aoeHealings[name]
+function I:IsAoEHealing(nameOrID)
+    if not nameOrID then return false end
+    return aoeHealings[nameOrID] or aoeHealingIDs[nameOrID]
 end
 
 local summonDuration = {
